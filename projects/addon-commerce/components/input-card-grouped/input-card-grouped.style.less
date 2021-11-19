@@ -29,9 +29,18 @@
 
 .t-common-wrapper {
     position: relative;
+
+    // fix problem in safari
+    // where were incorrect paint child layers by css translate
+    z-index: 2;
     height: 100%;
     width: 100%;
     overflow: hidden;
+
+    .t-wrapper,
+    .t-icons {
+        z-index: 1;
+    }
 }
 
 .t-wrapper {
@@ -117,7 +126,7 @@
     transform: translate3d(100%, 0, 0);
 
     &_collapsed {
-        transform: translate3d(4ch, 0, 0);
+        transform: translate3d(3.85ch, 0, 0);
     }
 }
 
@@ -141,6 +150,10 @@
 
     &_card {
         transition: color 0s var(--tui-duration);
+
+        &::-webkit-textfield-decoration-container {
+            display: none;
+        }
 
         :host._disabled & {
             transition: color 0s;
